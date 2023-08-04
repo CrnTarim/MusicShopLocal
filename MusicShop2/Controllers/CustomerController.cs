@@ -111,6 +111,45 @@ namespace MusicShop2.Controllers
                
                 return File(excelFileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "customers.xlsx");
             }
+
+        }      
+
+        [HttpGet("export/pdf/all")]
+        public async Task<IActionResult> ExportEmployeesPdf() 
+        {
+            var customers = await _service.GetAllAsync(); 
+
+            byte[] fileBytes;
+
+            using (var stream = new MemoryStream())
+            {
+                using (var document = new Document())
+                {
+                    PdfWriter.GetInstance(document, stream);
+                    document.Open();
+
+                    var table = new PdfPTable(3);
+                    table.AddCell("Id");
+                    table.AddCell("Name");
+                    table.AddCell("Phone");
+
+                    foreach (var customer in customers)
+                    {
+                        table.AddCell(customer.Id.ToString());
+                        table.AddCell(customer.Name);
+                        table.AddCell(customer.Phone);
+                    }
+
+                    document.Add(table);
+                    document.Close();
+                }
+                fileBytes = stream.ToArray();
+            }
+
+            var contentType = "application/pdf";
+            var fileName = "customer.pdf";
+
+            return File(fileBytes, contentType, fileName);
         }
     }
 

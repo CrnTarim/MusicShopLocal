@@ -145,33 +145,10 @@ namespace MusicShop2.Controllers
 
                 var excelFileBytes = package.GetAsByteArray();
 
-                byte[] pdfFileBytes;
-                using (var excelStream = new MemoryStream(excelFileBytes))
-                using (var packagePdf = new ExcelPackage(excelStream))
-                {
-                    var worksheetPdf = packagePdf.Workbook.Worksheets[0];
-
-                   
-                    var charts = worksheetPdf.Drawings.OfType<ExcelChart>().ToList();
-                    foreach (var chart in charts)
-                        worksheetPdf.Drawings.Remove(chart);
-
-                   
-                    var pdfStream = new MemoryStream();
-                    packagePdf.SaveAs(pdfStream);
-                    pdfFileBytes = pdfStream.ToArray();
-                }
-                
-                var pdfFileName = "record_companies.pdf";
-                var pdfFileType = "application/pdf";
-                var pdfContent = new MemoryStream(pdfFileBytes);
-
-                
-                return new FileStreamResult(pdfContent, pdfFileType)
-                {
-                    FileDownloadName = pdfFileName
-                };
+                return File(excelFileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "recordcampnies.xlsx");
             }
         }
+
+        
     }
 }
