@@ -1,0 +1,24 @@
+<div *ngIf="album">
+    <h2>{{ album.name}}</h2>
+    <div>
+        Name:
+        <input [(ngModel)]="album.name" placeholder="Name"  />
+    </div>
+    <div>
+        CustomerId:
+        <input [(ngModel)]="album.customerId" placeholder="CustomerId"  />
+    </div>
+    <div>
+        Singer:
+        <input [(ngModel)]="album.singer" placeholder="Singer"  />
+    </div>
+
+    <div>
+        RecordCompany:
+        <input [(ngModel)]="album.recordCompanyName" placeholder="RecordCompany"  />
+    </div>
+    <button (click)="updateAlbum(album)" >Save</button>
+    <button (click)="deleteAlbum(album)" >Delete</button>
+    <button (click)="createAlbum(album)" >Create</button>
+</div>
+
