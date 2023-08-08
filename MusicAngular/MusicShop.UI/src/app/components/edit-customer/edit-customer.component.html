@@ -1,0 +1,23 @@
+<div *ngIf="customer">
+    <h2>{{ customer.name}}</h2>
+    <div>
+        Name:
+        <input [(ngModel)]="customer.name" placeholder="Name"  />
+    </div>
+    <div>
+        CustomerId:
+        <input [(ngModel)]="customer.id" placeholder="CustomerId"  />
+    </div>
+    <div>
+        Email:
+        <input [(ngModel)]="customer.email" placeholder="Singer"  />
+    </div>
+
+    <div>
+        Phone:
+        <input [(ngModel)]="customer.phone" placeholder="RecordCompany"  />
+    </div>
+    <button (click)="updateCustomer(customer)" >Save</button>
+    <button (click)="deleteCustomer(customer)" >Delete</button>
+    <button (click)="createCustomer(customer)" >Create</button>
+</div>

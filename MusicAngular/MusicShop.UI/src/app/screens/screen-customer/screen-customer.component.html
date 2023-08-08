@@ -1,0 +1,20 @@
+<table>
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">      
+        <td>{{ customer.name}}</td>
+        <td>{{ customer.email}}</td>
+        <td>{{ customer.phone}}</td>
+        <td><button (click)="editCustomer(customer)">Edit</button></td>
+      </tr>
+    </tbody>
+  </table> 
+  
+  <button (click)="initNewCustomer()">Create New Customer</button>
+  <app-edit-customer [customer] ="customerToEdit">(customersUpdated)="updateCustomerList($event)"</app-edit-customer>
+

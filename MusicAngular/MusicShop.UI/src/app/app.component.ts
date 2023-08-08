@@ -9,28 +9,5 @@ import { MusicShopService } from './services/music-shop.service';
 })
 export class AppComponent {
   title = 'MusicShop.UI';
-  albums: Album[]=[];
-  albumToEdit?: Album;
-
-  constructor(private album : MusicShopService){}
-
-  ngOnInit() : void{
-    this.album.getAlbum().subscribe((result : Album[])=>(this.albums=result));
-  }
-
-  updateAlbumList(albums: Album[])
-  {
-   this.albums=albums;
-  }
-
-  initNewAlbum()
-  {
-    this.albumToEdit = new Album();
-  }
-
-  editAlbum(album : Album)
-  {
-    this.albumToEdit = album;
-  }
   
 }
