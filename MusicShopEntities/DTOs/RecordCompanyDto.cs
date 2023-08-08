@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace MusicShopEntities.DTOs
 {
     public class RecordCompanyDto : BaseDto
-    {        
+    {    
+        public int Id { get; set; }
         public int CompanyYear { get; set; }
         public int CompanyValue { get; set; }
         public int AlbumId { get; set; }

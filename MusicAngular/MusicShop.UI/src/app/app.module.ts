@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { ScreenCustomerComponent } from './screens/screen-customer/screen-customer.component';
 import { ScreenAlbumComponent } from './screens/screen-album/screen-album.component';
+import { ScreenRecordCompanyComponent } from './screens/screen-record-company/screen-record-company.component';
+import { EditRecordCompanyComponent } from './components/edit-record-company/edit-record-company.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { ScreenAlbumComponent } from './screens/screen-album/screen-album.compon
     EditCustomerComponent,
     ScreenCustomerComponent,
     ScreenAlbumComponent,
+    ScreenRecordCompanyComponent,
+    EditRecordCompanyComponent,
 
   ],
   imports: [

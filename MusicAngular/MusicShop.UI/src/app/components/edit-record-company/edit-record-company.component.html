@@ -1,0 +1,25 @@
+<div *ngIf="recordCompany">
+    <h2>{{ recordCompany.name}}</h2>
+    <div>
+        Name:
+        <input [(ngModel)]="recordCompany.name" placeholder="Name"  />
+    </div>
+    <div>
+        AlbumId:
+        <input [(ngModel)]="recordCompany.albumId" placeholder="CustomerId"  />
+    </div>
+    <div>
+        CompanyYear:
+        <input [(ngModel)]="recordCompany.companyYear" placeholder=" CompanyYear"  />
+    </div>
+
+    <div>
+        CompanyValue:
+        <input [(ngModel)]="recordCompany.companyValue" placeholder="CompanyValue"  />
+    </div>
+
+    <button (click)="updateCustomer(recordCompany)" >Save</button>
+    <button (click)="deleteCustomer(recordCompany)" >Delete</button>
+    <button (click)="createCustomer(recordCompany)" >Create</button>
+</div>
+

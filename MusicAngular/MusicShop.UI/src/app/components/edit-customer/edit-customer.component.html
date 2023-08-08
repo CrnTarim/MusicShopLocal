@@ -4,18 +4,18 @@
         Name:
         <input [(ngModel)]="customer.name" placeholder="Name"  />
     </div>
-    <div>
+    <!-- <div>
         CustomerId:
         <input [(ngModel)]="customer.id" placeholder="CustomerId"  />
-    </div>
+    </div> -->
     <div>
         Email:
-        <input [(ngModel)]="customer.email" placeholder="Singer"  />
+        <input [(ngModel)]="customer.email" placeholder=" Email:"  />
     </div>
 
     <div>
         Phone:
-        <input [(ngModel)]="customer.phone" placeholder="RecordCompany"  />
+        <input [(ngModel)]="customer.phone" placeholder="Phone"  />
     </div>
     <button (click)="updateCustomer(customer)" >Save</button>
     <button (click)="deleteCustomer(customer)" >Delete</button>
