@@ -1,0 +1,10 @@
+  <div>     
+    Name:
+      <input [(ngModel)]="admin.name" placeholder="Name" />
+    </div>
+  <div>
+        Password:
+        <input [(ngModel)]="admin.password" placeholder="Password" type="password" />
+  </div>
+  <button (click)="register(admin)">Register</button>
+  <button (click)="login(admin)">Login</button>

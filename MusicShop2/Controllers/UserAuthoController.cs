@@ -55,7 +55,7 @@ namespace MusicShop2.Controllers
             if (!VerifyPasswordHash(userDto.Password, entity.PassWordHash, entity.PassWordSalt))
             {
                
-                return Ok("password");
+                return Ok("wrong password");
             }
 
             return CreatedToken(entity);

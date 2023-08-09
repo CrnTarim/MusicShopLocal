@@ -1,0 +1,30 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserAutho } from 'src/app/models/admin';
+import { AdminService } from 'src/app/services/admin.service';
+
+@Component({
+  selector: 'app-screen-admin',
+  templateUrl: './screen-admin.component.html',
+  styleUrls: ['./screen-admin.component.css']
+})
+export class ScreenAdminComponent {
+
+  title = 'MusicShop.UI';
+  admin= new UserAutho();
+  
+  constructor(private adminService : AdminService, private router:Router ){}
+   
+  register(admin : UserAutho)
+   {
+      this.adminService.register(admin).subscribe();
+   }
+
+   login(admin : UserAutho)
+   {
+      this.adminService.login(admin).subscribe((token: string)=>{localStorage.setItem('authToken', token)});
+
+   }
+
+
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,10 @@ import { ScreenCustomerComponent } from './screens/screen-customer/screen-custom
 import { ScreenAlbumComponent } from './screens/screen-album/screen-album.component';
 import { ScreenRecordCompanyComponent } from './screens/screen-record-company/screen-record-company.component';
 import { EditRecordCompanyComponent } from './components/edit-record-company/edit-record-company.component';
+import { HomeComponent } from './screens/home/home.component';
+import { ScreenAdminComponent } from './screens/screen-admin/screen-admin.component';
+import { AuthInterceptor } from './services/admin-interceptor';
+
 
 
 @NgModule({
@@ -22,6 +26,8 @@ import { EditRecordCompanyComponent } from './components/edit-record-company/edi
     ScreenAlbumComponent,
     ScreenRecordCompanyComponent,
     EditRecordCompanyComponent,
+    HomeComponent,
+    ScreenAdminComponent,
 
   ],
   imports: [
@@ -31,7 +37,7 @@ import { EditRecordCompanyComponent } from './components/edit-record-company/edi
     FormsModule
 
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true,}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
