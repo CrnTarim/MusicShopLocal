@@ -9,6 +9,8 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using OfficeOpenXml.Drawing.Chart;
+using Microsoft.AspNetCore.SignalR;
+
 
 namespace MusicShop2.Controllers
 {
@@ -19,10 +21,12 @@ namespace MusicShop2.Controllers
      
         private readonly IMapper _mapper;
         private readonly IService<RecordCompany> _service;
+ 
         public RecordCompanyController(IMapper mapper, IService<RecordCompany> service)
         {
             _mapper = mapper;
             _service = service;
+            
         }
 
         [HttpGet]
@@ -45,6 +49,7 @@ namespace MusicShop2.Controllers
         public async Task Save(RecordCompanyDto recordCompanyDto)
         {
             await _service.AddAsync(_mapper.Map<RecordCompany>(recordCompanyDto));
+          
         }
 
         [HttpPut("{id}")]

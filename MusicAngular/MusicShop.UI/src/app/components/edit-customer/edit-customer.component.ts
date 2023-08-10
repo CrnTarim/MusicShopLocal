@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Customer } from 'src/app/models/customer-shop';
 import { CustomerService } from 'src/app/services/customer-service.service';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-customer',
@@ -12,11 +14,14 @@ export class EditCustomerComponent {
   @Input() customer?: Customer;
   @Output() customersUpdated = new EventEmitter<Customer[]>();
 
-  constructor(private customerService : CustomerService){}
+  private url="Customer";
 
-  ngOnInit():void{   
+  constructor(private customerService : CustomerService ,private http: HttpClient){}
+
+  ngOnInit():void{  
+
   }
-
+  
   updateCustomer(customer: Customer){
     this.customerService.updateCustomer(customer).subscribe((customers)=>this.customersUpdated.emit(customers));
   }

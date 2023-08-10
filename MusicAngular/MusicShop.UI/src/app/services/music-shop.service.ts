@@ -17,6 +17,7 @@ export class MusicShopService {
   public getAlbum(): Observable<Album[]>{
    
     return this.http.get<Album[]>(`${environment.apiUrl}/${this.url}`);
+    
   }
 
   public updateAlbum(album :Album): Observable<Album[]>{

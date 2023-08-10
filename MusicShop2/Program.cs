@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MusicShop2.Models;
 using MusicShopDataAccessLayer;
 using MusicShopDataAccessLayer.Repositories;
 using MusicShopDataAccessLayer.UnitOfWorks;
@@ -21,15 +22,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options => options.AddPolicy("MusicShopOrigins",
     policy =>
     {
-        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
     }));
 
+builder.Services.AddSignalR();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddScoped(typeof(ICustomerService), typeof(CustomerService));
-builder.Services.AddScoped(typeof(ICustomerRepository),typeof(CustomerRepo));
+builder.Services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepo));
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 
@@ -54,8 +56,15 @@ app.UseCors("MusicShopOrigins");
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<BroadcastHubs>("/notify");
+    endpoints.MapControllers();
+});
 
 app.Run();
+

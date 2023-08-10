@@ -8,6 +8,10 @@ using OfficeOpenXml;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Reactive;
+using Microsoft.AspNetCore.SignalR;
+using MusicShop2.Models;
+
 
 namespace MusicShop2.Controllers
 {
@@ -17,10 +21,14 @@ namespace MusicShop2.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IService<Album> _service;
-        public AlbumController(IMapper mapper, IService<Album> service)
+        private readonly IHubContext<BroadcastHubs, Models.IHubClients> _hub ;
+     
+        public AlbumController(IMapper mapper, IService<Album> service, IHubContext<BroadcastHubs, Models.IHubClients> hub)
         {
             _mapper = mapper;
             _service = service;
+            _hub = hub;
+         
         }
 
         [HttpGet]
@@ -28,6 +36,7 @@ namespace MusicShop2.Controllers
         {
             var album= await _service.GetAllAsync();
             var albumDto = _mapper.Map<List<Album>>(album.ToList());
+            await _hub.Clients.All.BroadcastMessage();
             return albumDto;
         }
 
@@ -36,6 +45,7 @@ namespace MusicShop2.Controllers
         {
             var album = await _service.GetAllAsync();
             var albumDto = _mapper.Map<List<Album>>(album);
+            await _hub.Clients.All.BroadcastMessage();
             return albumDto;
         }
        
@@ -43,9 +53,10 @@ namespace MusicShop2.Controllers
         public async Task Save(AlbumDto albumDto)
         {
             await _service.AddAsync(_mapper.Map<Album>(albumDto));
+            await _hub.Clients.All.BroadcastMessage();
+
         }
         
-
         [HttpPut("{id}")]
         public async Task Update(int id,AlbumDto albumDto)
         {

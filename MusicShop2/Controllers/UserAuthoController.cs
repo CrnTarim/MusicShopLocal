@@ -45,36 +45,36 @@ namespace MusicShop2.Controllers
         public async Task<ActionResult<string>> Login(UserAuthoDto userDto)
         {
 
-            var entity =  _service.Where(x=>x.Name==userDto.Name).FirstOrDefault();
+            var entity =  _service.Where(x => x.Name == userDto.Name).FirstOrDefault();
 
             if (entity == null)
-            {                
+            {
                 return Ok("wrong username");
             }
 
             if (!VerifyPasswordHash(userDto.Password, entity.PassWordHash, entity.PassWordSalt))
             {
-               
+
                 return Ok("wrong password");
             }
 
             return CreatedToken(entity);
         }
-            private string CreatedToken(UserAutho user)
-            {
-                List<Claim> claims = new List<Claim> {
+        private string CreatedToken(UserAutho user)
+        {
+            List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, user.Name)
-               
+
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-                var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds
-                );
+            var token = new JwtSecurityToken(
+            claims: claims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: creds
+            );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;

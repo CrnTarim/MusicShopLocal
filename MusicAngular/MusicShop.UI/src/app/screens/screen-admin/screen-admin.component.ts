@@ -23,7 +23,6 @@ export class ScreenAdminComponent {
    login(admin : UserAutho)
    {
       this.adminService.login(admin).subscribe((token: string)=>{localStorage.setItem('authToken', token)});
-
    }
 
 

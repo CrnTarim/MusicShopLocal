@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecordCompany } from 'src/app/models/recordCompany-shop';
 import { RecordCompanyService } from 'src/app/services/record-company.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-edit-record-company',
@@ -12,9 +13,12 @@ export class EditRecordCompanyComponent {
   @Input() recordCompany?: RecordCompany;
   @Output() recordCompaniesUpdated = new EventEmitter<RecordCompany[]>();
 
+  private url="RecordCompany";
+
   constructor(private recordCompanyService : RecordCompanyService){}
 
-  ngOnInit():void{   
+  ngOnInit():void{     
+
   }
 
   updateCustomer(recordCompany: RecordCompany){
