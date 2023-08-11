@@ -1,23 +1,28 @@
-<table>
-    <thead>
-      <th>Id</th>
-      <th>Name</th>
-      <th>CompanyYear</th>
-      <th>CompanyValue</th>
-      <th>AlbumId</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let recordCompany of recordCompanies">  
-        <td>{{ recordCompany.id}}</td>    
-        <td>{{ recordCompany.name}}</td>
-        <td>{{ recordCompany.companyYear}}</td>
-        <td>{{ recordCompany.companyValue}}</td>
-        <td>{{ recordCompany.albumId}}</td>
-        <td><button (click)="editRecordCompany(recordCompany)">Edit</button></td>
-      </tr>
-    </tbody>
-  </table> 
-  
+<div class="record-company-list-container">
+  <table>
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>CompanyYear</th>
+              <th>CompanyValue</th>
+              <th>AlbumId</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let recordCompany of recordCompanies">
+              <td>{{ recordCompany.id }}</td>
+              <td>{{ recordCompany.name }}</td>
+              <td>{{ recordCompany.companyYear }}</td>
+              <td>{{ recordCompany.companyValue }}</td>
+              <td>{{ recordCompany.albumId }}</td>
+              <td><button (click)="editRecordCompany(recordCompany)">Edit</button></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div class="button-group">
   <button (click)="initNewRecordCompany()">Create New RecordCompany</button>
-  <app-edit-record-company [recordCompany]="recordCompanyToEdit">(recordCompaniesUpdated)="updateRecordCompanyList($event)"</app-edit-record-company>
-
+  <app-edit-record-company [recordCompany]="recordCompanyToEdit" (recordCompaniesUpdated)="updateRecordCompanyList($event)"></app-edit-record-company>
+</div>

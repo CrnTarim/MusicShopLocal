@@ -12,6 +12,9 @@ export class ScreenAdminComponent {
 
   title = 'MusicShop.UI';
   admin= new UserAutho();
+
+  nameExceedsLimit = false;
+  passwordExceedsLimit = false;
   
   constructor(private adminService : AdminService, private router:Router ){}
    
@@ -24,6 +27,22 @@ export class ScreenAdminComponent {
    {
       this.adminService.login(admin).subscribe((token: string)=>{localStorage.setItem('authToken', token)});
    }
-
+   
+   
+   checkCharacterLimit(value: string, limit: number, field: string): void {
+    if (value.length > limit) {
+        if (field === 'name') {
+            this.nameExceedsLimit = true;
+        } else if (field === 'password') {
+            this.passwordExceedsLimit = true;
+        }
+    } else {
+        if (field === 'name') {
+            this.nameExceedsLimit = false;
+        } else if (field === 'password') {
+            this.passwordExceedsLimit = false;
+        }
+    }
+}
 
 }

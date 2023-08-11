@@ -14,10 +14,10 @@ export class ScreenAlbumComponent {
   albums: Album[]=[];
   albumToEdit?: Album;
 
-  constructor(private album : MusicShopService,private albumService : MusicShopService){}
+  constructor(private album : MusicShopService){}
 
   ngOnInit() : void{
-    this.album.getAlbum().subscribe((result : Album[])=>(this.albums=result));
+    this.album.getAlbum().subscribe((result : Album[])=>{this.albums=result; console.log});
 
     const connection = new signalR.HubConnectionBuilder()
     .withUrl('https://localhost:7142/notify')
@@ -33,8 +33,10 @@ export class ScreenAlbumComponent {
     });
 
     connection.on("BroadcastMessage", () => {  
-      this.albumService.getAlbum();
+      this.album.getAlbum().subscribe((result : Album[])=>{this.albums=result; console.log});
+
     });  
+
   }
 
   updateAlbumList(albums: Album[])

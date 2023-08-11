@@ -11,5 +11,6 @@ namespace MusicShopEntities.DTOs
         public string Singer { get; set; }   
         public string RecordCompanyName { get; set; }
         public int CustomerId { get; set; }
+        public int CreatedYear { get; set; }
     }
 }

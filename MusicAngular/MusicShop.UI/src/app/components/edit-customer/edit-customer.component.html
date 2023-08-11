@@ -1,23 +1,21 @@
-<div *ngIf="customer">
-    <h2>{{ customer.name}}</h2>
-    <div>
-        Name:
-        <input [(ngModel)]="customer.name" placeholder="Name"  />
-    </div>
-    <!-- <div>
-        CustomerId:
-        <input [(ngModel)]="customer.id" placeholder="CustomerId"  />
-    </div> -->
-    <div>
-        Email:
-        <input [(ngModel)]="customer.email" placeholder=" Email:"  />
-    </div>
 
-    <div>
-        Phone:
-        <input [(ngModel)]="customer.phone" placeholder="Phone"  />
+<div class="customer-details" *ngIf="customer">
+    <h2>{{ customer.name }}</h2>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" [(ngModel)]="customer.name" placeholder="Name" />
     </div>
-    <button (click)="updateCustomer(customer)" >Save</button>
-    <button (click)="deleteCustomer(customer)" >Delete</button>
-    <button (click)="createCustomer(customer)" >Create</button>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="customer.email" placeholder="Email" />
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input id="phone" [(ngModel)]="customer.phone" placeholder="Phone" />
+    </div>
+    <div class="button-group">
+        <button (click)="updateCustomer(customer)">Save</button>
+        <button (click)="deleteCustomer(customer)">Delete</button>
+        <button (click)="createCustomer(customer)">Create</button>
+    </div>
 </div>

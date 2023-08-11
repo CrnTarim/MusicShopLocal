@@ -15,26 +15,13 @@ export class EditAlbumComponent implements OnInit{
   @Input() album?: Album;
   @Output() albumsUpdated = new EventEmitter<Album[]>();
 
+  nameExceedsLimit = false;
+  singerExceedsLimit = false;
+  recordCompanyExceedsLimit = false;
+
   constructor(private albumService : MusicShopService,private http: HttpClient){}
 
   ngOnInit():void{ 
-
-    // const connection = new signalR.HubConnectionBuilder()
-    // .withUrl('https://localhost:7142/notify')
-    // .configureLogging(signalR.LogLevel.Information)
-    // .build();
-
-    // connection.start()
-    // .then(function () {
-    //     console.log('SignalR Album Connected!');
-    // })
-    // .catch(function (err) {
-    //     return console.error(err.toString());
-    // });
-
-    // connection.on("BroadcastMessage", () => {  
-    //   this.albumService.getAlbum();
-    // });  
       
   }
 
@@ -47,8 +34,33 @@ export class EditAlbumComponent implements OnInit{
   }
   
   createAlbum(album: Album){
-    this.albumService.createAlbum(album).subscribe((albums)=>this.albumsUpdated.emit(albums));
-     
+    this.albumService.createAlbum(album).subscribe((albums)=>this.albumsUpdated.emit(albums));  
+
   }
 
+  checkCharacterLimit(value: string, maxLength: number, field: string) {
+    switch (field) {
+        case 'name':
+            this.nameExceedsLimit = value.length > maxLength;
+            break;
+        case 'singer':
+            this.singerExceedsLimit = value.length > maxLength;
+            break;
+        case 'recordCompanyName':
+            this.recordCompanyExceedsLimit = value.length > maxLength;
+            break;
+        default:
+            break;
+    }
+ }
+
+onCustomerIdInput(event: any) {
+  const input = event.target;
+  const value = input.value;
+
+  if (!/^\d*$/.test(value)) {
+      input.value = value.slice(0, -1);
+    }
+ }
+ 
 }

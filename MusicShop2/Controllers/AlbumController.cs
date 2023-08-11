@@ -54,7 +54,6 @@ namespace MusicShop2.Controllers
         {
             await _service.AddAsync(_mapper.Map<Album>(albumDto));
             await _hub.Clients.All.BroadcastMessage();
-
         }
         
         [HttpPut("{id}")]

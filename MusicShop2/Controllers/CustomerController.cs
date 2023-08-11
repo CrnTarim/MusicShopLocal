@@ -10,7 +10,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.SignalR;
-
+using MusicShop2.Models;
 
 namespace MusicShop2.Controllers
 {
@@ -20,13 +20,14 @@ namespace MusicShop2.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICustomerService _service;
-        
+        private readonly IHubContext<BroadcastHubs, Models.IHubClients> _hub;
 
-        public CustomerController(IMapper mapper, ICustomerService service)
+
+        public CustomerController(IMapper mapper, ICustomerService service, IHubContext<BroadcastHubs, Models.IHubClients> hub)
         {
             _mapper = mapper;
             _service = service;
-            
+            _hub = hub;
         }
 
         [HttpGet]
@@ -34,6 +35,7 @@ namespace MusicShop2.Controllers
         {
             var customer = await _service.GetAllAsync();
             var customerDto = _mapper.Map<List<CustomerDto>>(customer.ToList());
+            await _hub.Clients.All.BroadcastMessage();
             return customerDto;
         }
 
@@ -42,6 +44,7 @@ namespace MusicShop2.Controllers
         {
             var customer = await _service.GetAllAsync();
             var customerDto = _mapper.Map<List<Customer>>(customer);
+            await _hub.Clients.All.BroadcastMessage();
             return customerDto;
         }
 
@@ -49,7 +52,8 @@ namespace MusicShop2.Controllers
         public async Task Save(CustomerDto customerDto)
         {
             await _service.AddAsync(_mapper.Map<Customer>(customerDto));
-           
+            await _hub.Clients.All.BroadcastMessage();
+
         }
 
         [HttpPut("{id}")]

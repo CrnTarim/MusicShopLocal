@@ -1,22 +1,27 @@
-<table>
-    <thead>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let customer of customers">  
-        <td>{{ customer.id}}</td>    
-        <td>{{ customer.name}}</td>
-        <td>{{ customer.email}}</td>
-        <td>{{ customer.phone}}</td>
-        <td><button (click)="editCustomer(customer)">Edit</button></td>
-      </tr>
-    </tbody>
-  </table> 
-  
+<div class="customer-list-container">
+  <table>
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let customer of customers">
+              <td>{{ customer.id }}</td>
+              <td>{{ customer.name }}</td>
+              <td>{{ customer.email }}</td>
+              <td>{{ customer.phone }}</td>
+              <td><button (click)="editCustomer(customer)">Edit</button></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div class="button-group">
   <button (click)="initNewCustomer()">Create New Customer</button>
-  <app-edit-customer [customer] ="customerToEdit">(customersUpdated)="updateCustomerList($event)"</app-edit-customer>
+  <app-edit-customer [customer]="customerToEdit" (customersUpdated)="updateCustomerList($event)"></app-edit-customer>
+</div>
 

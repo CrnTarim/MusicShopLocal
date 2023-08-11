@@ -1,0 +1,20 @@
+.nav-buttons-container {
+    display: flex;
+    gap: 5px;
+    background-color: rgb(15, 120, 225);
+    justify-content: center;
+    padding-top: 10px;
+  }
+  
+  .nav-buttons-container button {
+    padding: 8px 15px;
+    background-color: #084b7b;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .router-outlet {
+    margin-top: 20px;
+  }
